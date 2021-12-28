@@ -9,9 +9,19 @@ if (!clientId || !guildId || !token) {
 }
 
 const commandsJSON = commands.map(c => c.data.toJSON());
+const rest = new REST({version: '9'}).setToken(token);
 
-const rest = new REST({ version: '9' }).setToken(token);
+(async () => {
+    try {
+        console.log('Started refreshing application (/) commands.');
 
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commandsJSON })
-    .then(() => console.log('Successfully registered application commands.'))
-    .catch(console.error);
+        await rest.put(
+            Routes.applicationGuildCommands(clientId, guildId),
+            {body: commandsJSON},
+        );
+
+        console.log('Successfully reloaded application (/) commands.');
+    } catch (error) {
+        console.error(error);
+    }
+})();

@@ -5,19 +5,22 @@ import {IEvent} from '../types/event';
 export default {
     name: 'interactionCreate',
     async execute(interaction: Interaction): Promise<void> {
-        if (!interaction.isCommand()) return;
         const client = interaction.client as Client;
+        let entity;
+        if (interaction.isCommand()) {
+            entity = client.commands.get(interaction.commandName);
+        } else if (interaction.isSelectMenu()) {
+            entity = client.selectMenus.get(interaction.id);
+        }
 
-        const command = client.commands.get(interaction.commandName);
-
-        if (!command) return;
+        if (!entity) return;
 
         try {
-            await command.execute(interaction);
+            await entity.execute(interaction);
         } catch (error) {
             console.error(error);
             await interaction.reply({
-                content: 'There was an error while executing this command!',
+                content: `An oopsie happened.`,
                 ephemeral: true
             });
         }

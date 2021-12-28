@@ -4,7 +4,8 @@
   "description": "A Discord bot",
   "main": "dist/main.js",
   "scripts": {
-    "start": "tsc && node -r dotenv/config dist/main.js",
+    "start": "npm run register-commands && npm run start-app",
+    "start-app": "tsc && node -r dotenv/config dist/main.js",
     "register-commands": "tsc && node -r dotenv/config dist/deploy-commands.js",
     "build": "tsc"
   },
