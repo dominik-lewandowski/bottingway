@@ -6,7 +6,7 @@ export default {
     data: new SlashCommandBuilder()
         .setName('user')
         .setDescription('Replies with user info!'),
-    async execute(interaction: CommandInteraction) {
+    async execute(interaction: CommandInteraction): Promise<void> {
         const user = interaction.user;
         await interaction.reply(`Your tag: ${user.tag}\nYour id: ${user.id}`);
     },

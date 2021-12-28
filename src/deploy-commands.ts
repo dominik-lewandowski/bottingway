@@ -1,6 +1,5 @@
-import {SlashCommandBuilder} from '@discordjs/builders';
 import {REST} from '@discordjs/rest';
-import {Routes} from 'discord-api-types';
+import {Routes} from 'discord-api-types/v9';
 import commands from './commands';
 
 const [clientId, guildId, token] = [process.env.CLIENT_ID, process.env.GUILD_ID, process.env.TOKEN];

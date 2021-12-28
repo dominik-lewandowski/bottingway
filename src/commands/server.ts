@@ -6,7 +6,7 @@ export default {
     data: new SlashCommandBuilder()
         .setName('server')
         .setDescription('Replies with server info!'),
-    async execute(interaction: CommandInteraction) {
+    async execute(interaction: CommandInteraction): Promise<void> {
         const guild = interaction.guild as Guild;
         await interaction.reply(`Server name: ${guild.name}\nTotal members: ${guild.memberCount}`);
     },
